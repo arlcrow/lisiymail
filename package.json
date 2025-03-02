@@ -1,0 +1,11 @@
+{
+  "name": "lisiymail",
+  "version": "1.0.0",
+  "main": "worker.js",
+  "repository": "https://github.com/arlcrow/lisiymail",
+  "author": "<matvey@arlcrow.site>",
+  "license": "MIT",
+  "dependencies": {
+    "wrangler": "^3.111.0"
+  }
+}

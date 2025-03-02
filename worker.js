@@ -1,16 +1,21 @@
+const messages = []; // Хранилище сообщений в памяти
+
 export default {
   async email(message, env, ctx) {
-    const blockList = ["hacker@example.com", "spammer@example.com"]
-    if (blockList.includes(message.from)) {
-      message.setReject("Address is blocked");
-      return;
-    }
-    await message.forward("inbox@corp");
+    const rawMessage = await message.text(); // Получаем текст сообщения
+    messages.push(rawMessage); // Сохраняем в массив
+    await message.forward("bigratmonster362@gmail.com"); // Пересылаем сообщение
   },
-  async fetch(request, env, ctx) {
-		const url = new URL(request.url);
-		console.log(`Hello ${navigator.userAgent} at path ${url.pathname}!`);
 
-		return Response.json({"hello": "world"});
-	}
-}
+  async fetch(request, env, ctx) {
+    const url = new URL(request.url);
+
+    if (url.pathname === "/messages") {
+      // Возвращаем сохраненные сообщения
+      return Response.json({ messages });
+    }
+
+    console.log(`Hello ${request.headers.get("User-Agent")} at path ${url.pathname}!`);
+    return Response.json({ hello: "world" });
+  }
+};
