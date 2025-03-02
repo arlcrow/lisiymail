@@ -11,6 +11,6 @@ export default {
 		const url = new URL(request.url);
 		console.log(`Hello ${navigator.userAgent} at path ${url.pathname}!`);
 
-		return new Response.json({"hello": "world"});
+		return Response.json({"hello": "world"});
 	}
 }
